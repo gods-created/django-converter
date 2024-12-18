@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+
+  application:
+    build: ./
+    restart: always
+    ports:
+      - 8001:8001
+    environment:
+      - APP_SECRET_KEY=''

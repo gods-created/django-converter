@@ -1,0 +1,7 @@
+django
+djangorestframework
+django-cors-headers
+cryptography
+python-dotenv
+aiohttp
+asyncio

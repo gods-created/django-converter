@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+</head>
+<body class="d-flex flex-column h-100">
+    {% include 'dashboard/layouts/header.html' %}
+
+    <main class="flex-grow-1">
+        <div class="container my-5">
+            <div class="p-5 text-center bg-body-tertiary rounded-3">
+              <h1 class="text-body-emphasis">IQConverter</h1>
+              <p class="col-lg-8 mx-auto fs-5 text-muted">
+                convert your currency to any different currency if you have earned attempts
+              </p>
+              <div class="d-flex align-items-center justify-content-center">
+                <button class="btn btn-primary btn-sm edit-block" type="button">
+                    Converter -> Quiz
+                </button>
+              </div>
+            </div>
+        </div>
+
+        <div class="container my-5">
+            <div class="row row-lg-2 row-md-1 row-sm-1">
+                <div class="col col-lg-6 col-md-8 col-sm-12">
+                    <div class="converter d-block">
+                        <div class="mb-3">
+                            <span class="fw-bold display-6">
+                                Attempts: {{ user.attempts__count }}
+                            </span>
+                        </div>
+                        <form action="/api/convert" method="POST">
+                            {{ converter_form }}
+                            <button 
+                                class="btn btn-outline-dark" 
+                                type="submit" 
+                            >Convert</button>
+                        </form>
+                    </div>
+                    
+                    <div class="quiz d-none">
+                        <div class="mb-3">
+                            <span class="fw-bold display-6">
+                                Task: {{ task_string }}
+                            </span>
+                        </div>
+                        <form action="/api/quiz" method="POST">
+                            {{ quiz_form }}
+                            <button 
+                                class="btn btn-outline-dark" 
+                                type="submit" 
+                            >Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% include 'dashboard/layouts/footer.html' %}
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="{% static 'js/dashboard.js' %}" type="module"></script>
+</body>
+</html>
